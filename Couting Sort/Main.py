@@ -9,7 +9,7 @@ def comparar_algoritmos(personas):
     tiempo_counting = time.time() - inicio
     print(f"Counting Sort: {tiempo_counting:.4f} segundos")
 
-    print("⚙ Ordenando con sorted() (TimSort)...")
+    print("Ordenando con sorted() (TimSort)...")
     inicio = time.time()
     resultado_sorted = sorted(personas, key=lambda x: x[1])
     tiempo_sorted = time.time() - inicio
@@ -36,10 +36,10 @@ def main():
             print(" Generando datos...")
             inicio = time.time()
             personas = generar_datos(cantidad)
-            guardar_en_csv(personas)
+            #guardar_en_csv(personas)
             fin = time.time()
             print(f"Datos generados y guardados en 'personas.csv' ({fin - inicio:.2f} s)")
-        
+
         elif opcion == "2":
             print("Cargando datos desde 'personas.csv'...")
             personas = cargar_desde_csv()
@@ -54,11 +54,9 @@ def main():
 
         elif opcion == "3":
             print("Cargando datos desde 'personas.csv'...")
-            personas = cargar_desde_csv()
-            if not personas:
-                continue
-            comparar_algoritmos(personas)
-            
+            if personas := cargar_desde_csv():
+                comparar_algoritmos(personas)
+
         elif opcion == "4":
             print("Saliendo del programa. ¡Hasta luego!")
             break
